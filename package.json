@@ -1,0 +1,67 @@
+{
+  "name": "sigip-frontend",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "serve:ssr:sigip-frontend": "node dist/sigip-frontend/server/server.mjs",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/cdk": "20.1.5",
+    "@angular/common": "^20.1.0",
+    "@angular/compiler": "^20.1.0",
+    "@angular/core": "^20.1.0",
+    "@angular/forms": "^20.1.0",
+    "@angular/material": "20.1.5",
+    "@angular/platform-browser": "^20.1.0",
+    "@angular/platform-server": "^20.1.0",
+    "@angular/router": "^20.1.0",
+    "@angular/ssr": "^20.1.5",
+    "@types/testing-library__jest-dom": "^6.0.0",
+    "express": "^5.1.0",
+    "jest": "^30.0.5",
+    "jest-preset-angular": "^15.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/builder": "20.1.1",
+    "@angular/build": "^20.1.5",
+    "@angular/cli": "^20.1.5",
+    "@angular/compiler-cli": "^20.1.0",
+    "@eslint/js": "^9.29.0",
+    "@jest/globals": "^30.0.5",
+    "@playwright/test": "^1.54.2",
+    "@testing-library/angular": "^18.0.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.19",
+    "angular-eslint": "20.1.1",
+    "eslint": "^9.29.0",
+    "jasmine-core": "~5.8.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "playwright-ng-schematics": "2.1.0",
+    "testing-library": "^0.0.2",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "8.34.1"
+  }
+}
