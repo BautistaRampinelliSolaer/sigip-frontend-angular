@@ -1,0 +1,55 @@
+<mat-card class="card" appearance="outlined">
+  <h2 class="title">Inicio de sesión</h2>
+
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()" autocomplete="on">
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Usuario</mat-label>
+      <input matInput formControlName="username" placeholder="username" autocomplete="username" />
+      @if (form.controls.username.touched && form.controls.username.invalid) {
+        <mat-error>Ingresá tu usuario.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Contraseña</mat-label>
+      <input matInput
+             [type]="hidePassword() ? 'password' : 'text'"
+             formControlName="password"
+             autocomplete="current-password"
+             placeholder="password"
+      />
+      <button mat-icon-button
+              type="button"
+              matSuffix
+              name="login"
+              class="icon-btn"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="hidePassword() ? 'Mostrar contraseña' : 'Ocultar contraseña'">
+        <mat-icon>{{ hidePassword() ? 'visibility' : 'visibility_off' }}</mat-icon>
+      </button>
+      @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+        <mat-error>La contraseña es obligatoria.</mat-error>
+      } @else if (form.controls.password.touched && form.controls.password.hasError('minlength')) {
+        <mat-error>Mínimo 6 caracteres.</mat-error>
+      }
+    </mat-form-field>
+
+    <button class="submit"
+            mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="form.invalid || loading()"
+            [attr.aria-busy]="loading()">
+      @if (loading()) {
+        <mat-progress-spinner diameter="16" strokeWidth="3" mode="indeterminate"></mat-progress-spinner>
+        <span>Ingresando…</span>
+      } @else {
+        <span>Ingresar</span>
+      }
+    </button>
+  </form>
+
+  @if (error()) {
+    <p class="err" role="alert">{{ error() }}</p>
+  }
+</mat-card>

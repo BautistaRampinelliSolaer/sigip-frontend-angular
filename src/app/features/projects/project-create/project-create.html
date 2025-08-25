@@ -1,0 +1,13 @@
+<app-header title="Crear Proyecto"></app-header>
+
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+      <label><span>Código</span><input formControlName="code" /></label>
+      <label><span>Nombre</span><input formControlName="name" /></label>
+      <label><span>Descripción</span><input formControlName="description" /></label>
+      <label><span>Estándares</span><input formControlName="standards" /></label>
+      <label><span>Estado</span><input formControlName="state" /></label>
+      <label><span>Tipo</span><input formControlName="type" /></label>
+      <label><span>Responsable</span><input formControlName="responsibleId" type="number" /></label> <!-- change the type and create selector from users -->
+      <label><span>Revisor</span><input formControlName="reviewerId" type="number" /></label>
+      <button type="submit" [disabled]="form.invalid">Crear</button>   
+</form>

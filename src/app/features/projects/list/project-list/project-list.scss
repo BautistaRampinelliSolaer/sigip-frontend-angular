@@ -1,0 +1,23 @@
+
+.btn{
+    padding:.5rem 1rem;
+    border:1px solid #ddd;
+    border-radius:.5rem;
+    text-decoration:none
+}
+
+// previous:
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:1rem
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:1fr 200px auto;
+    gap:.75rem;
+    margin-bottom:1rem
+}

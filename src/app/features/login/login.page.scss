@@ -1,0 +1,65 @@
+/* Contenedor de la página */
+.login-page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background: var(--app-bg);
+}
+
+/* Tarjeta principal */
+.card {
+  margin: 15% 0% 5% 33%;
+  width: 420px;
+  background: var(--app-surface);
+  color: var(--app-text);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2);
+  padding: var(--space-6);
+
+  &:where(html.app-theme--dark &) {
+    box-shadow: var(--shadow-3);
+  }
+}
+
+.title {
+  margin: 0 0 var(--space-4);
+  line-height: 1.2;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.field {
+  width: 100%;
+}
+
+input {
+    margin-left: 2%;
+}
+
+.icon-btn {
+  --mdc-icon-button-state-layer-size: 36px;
+}
+
+.submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding-block: calc(var(--space-2) + 2px);
+
+  &:hover {
+    box-shadow: var(--shadow-2);
+  }
+}
+
+.err {
+  margin-top: var(--space-4);
+  color: var(--app-danger);
+}
