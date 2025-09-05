@@ -1,8 +1,9 @@
 export * from './users/user-dto';
-export * from './projects/project-dto';
-export * from './projects/project-mini-dto';
-export * from './projects/create-project-request';
-export * from './documents/document-dto';
+export * from './projects/project';
+export * from './projects/project-hours';
+export * from './projects/lifecycle';
+// export * from './projects/budget';
+export * from './documents/document';
 export * from './common/object-mini-dto';
 export * from './common/api-response';
 export * from './common/auth-response';
