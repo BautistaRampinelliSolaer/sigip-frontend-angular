@@ -1,0 +1,4 @@
+    <div class="toolbar">
+      <app-table-search [query]="query()" (changed)="search.emit($event)" />
+      <app-columns-toggle [columns]="columns()" [hidden]="hidden()" (toggle)="toggle.emit($event)" />
+    </div>

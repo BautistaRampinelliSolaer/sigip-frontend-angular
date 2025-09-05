@@ -1,0 +1,13 @@
+<div class="switcher">
+  <div class="row">
+    <span class="label">Theme</span>
+    <button mat-button (click)="setTheme('light')" [class.active]="theme() === 'light'">Light</button>
+    <button mat-button (click)="setTheme('dark')"  [class.active]="theme() === 'dark'">Dark</button>
+  </div>
+
+  <div class="row">
+    <span class="label">Density</span>
+    <button mat-button (click)="setDensity('comfortable')" [class.active]="density() === 'comfortable'">Comfortable</button>
+    <button mat-button (click)="setDensity('compact')"     [class.active]="density() === 'compact'">Compact</button>
+  </div>
+</div>

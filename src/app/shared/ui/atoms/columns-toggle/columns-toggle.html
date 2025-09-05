@@ -1,0 +1,14 @@
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Columnas">
+      <mat-icon>view_column</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <ng-container>
+    @for (col of columns(); track col.id) {
+        <button mat-menu-item>
+          <mat-checkbox [checked]="!hidden().has(col.id)" (change)="toggle.emit(col.id)">
+            {{ col.header }}
+          </mat-checkbox>
+        </button>
+    }
+      </ng-container>
+    </mat-menu>

@@ -1,0 +1,12 @@
+@if (data.length) {
+    <div class="table-wrap">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-content></ng-content>
+        </table>
+        <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50]"></mat-paginator>
+    </div>
+} @else {
+    <div class="no-data">
+        <p>No hay datos para mostrar</p>
+    </div>
+}

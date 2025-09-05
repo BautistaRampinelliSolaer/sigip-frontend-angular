@@ -1,0 +1,4 @@
+    <mat-form-field appearance="outline">
+      <mat-label>Buscar</mat-label>
+      <input matInput [value]="query()" (input)="changed.emit(($any($event.target).value ?? ''))" />
+    </mat-form-field>

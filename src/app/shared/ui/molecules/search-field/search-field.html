@@ -1,0 +1,7 @@
+<mat-form-field appearance="outline" class="w-full">
+    <mat-icon matPrefix>searh</mat-icon>
+    <input matInput [placeholder]="placeholder()" [formControl]="control()"/>
+    @if (control().value) {
+        <button mat-icon-button matSuffix (click)="control().reset()"><mat-icon>close</mat-icon></button>
+    }
+</mat-form-field>

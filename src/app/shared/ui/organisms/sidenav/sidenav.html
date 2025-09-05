@@ -1,0 +1,8 @@
+<nav class="side">
+    <div class="user">👤 {{userName()}}</div>
+    <a routerLink="/" routerLinkActive="active">Home</a>
+    <a routerLink="/projects" routerLinkActive="active">Proyectos</a>
+    <a routerLink="/hours" routerLinkActive="active">Horas</a>
+    <a routerLink="/clients" routerLinkActive="active">Clientes</a>
+    <button class="logout" (click)="logout.emit()">Cerrar Sesión</button>
+</nav>

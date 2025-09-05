@@ -1,0 +1,16 @@
+.table-wrap {
+  overflow: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+.drag {
+  opacity: 0.5;
+  margin-right: 0.5rem;
+  cursor: grab;
+}
+.exp {
+  width: 40px;
+}
+.detail-row td {
+  background: #fafafa;
+}
