@@ -1,1 +1,89 @@
-<p>clients-page works!</p>
+<section class="clients-header">
+  <mat-button-toggle-group
+    [value]="viewMode()"
+    (change)="viewMode.set($any($event.value))"
+    aria-label="Vistas"
+  >
+    <mat-button-toggle value="all">Ver 3 tablas</mat-button-toggle>
+    <mat-button-toggle value="companies">Empresas</mat-button-toggle>
+    <mat-button-toggle value="plants">Plantas</mat-button-toggle>
+    <mat-button-toggle value="contacts">Contactos</mat-button-toggle>
+  </mat-button-toggle-group>
+</section>
+
+<section class="clients-grid">
+  @if (showCompanies()) {
+  <mat-card class="block">
+    <mat-card-header>
+      <mat-card-title>Empresas</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <app-data-grid
+        [data]="companies()"
+        [columns]="companyCols"
+        [detailTemplate]="companyDetail"
+        (rowClick)="openCompany($event)"
+      />
+    </mat-card-content>
+  </mat-card>
+  } @if (showPlants()) {
+  <mat-card class="block">
+    <mat-card-header>
+      <mat-card-title>Plantas</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <app-data-grid
+        [data]="plants()"
+        [columns]="plantCols"
+        [detailTemplate]="plantDetail"
+        (rowClick)="openPlant($event)"
+      />
+    </mat-card-content>
+  </mat-card>
+  } @if (showContacts()) {
+  <mat-card class="block">
+    <mat-card-header>
+      <mat-card-title>Contactos</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <app-data-grid
+        [data]="contacts()"
+        [columns]="contactCols"
+        [detailTemplate]="contactDetail"
+        (rowClick)="openContact($event)"
+      />
+    </mat-card-content>
+  </mat-card>
+  }
+</section>
+
+<!-- Detail templates -->
+<ng-template #companyDetail let-row>
+  <div class="detail">
+    <div><b>Industria:</b> {{ row.industry }}</div>
+    <div><b>Grupo:</b> {{ row.group }}</div>
+    <div><b>Plantas:</b> {{ row.plants?.length ?? 0 }}</div>
+    <div><b>Contactos:</b> {{ row.contacts?.length ?? 0 }}</div>
+  </div>
+</ng-template>
+
+<ng-template #plantDetail let-row>
+  <div class="detail">
+    <div><b>Empresa:</b> {{ row.company?.name }}</div>
+    <div><b>País/Ciudad:</b> {{ row.country }} / {{ row.city }}</div>
+    <div><b>Contactos:</b> {{ row.contacts?.length ?? 0 }}</div>
+  </div>
+</ng-template>
+
+<ng-template #contactDetail let-row>
+  <div class="detail">
+    <div><b>Email:</b> {{ row.email }}</div>
+    <div><b>Tel:</b> {{ row.phone }}</div>
+    <div><b>Empresa:</b> {{ row.company?.name }}</div>
+    <div><b>Planta:</b> {{ row.plantCompany?.name }}</div>
+    <div><b>Ubicación:</b> {{ row.country }} - {{ row.city }}</div>
+  </div>
+</ng-template>

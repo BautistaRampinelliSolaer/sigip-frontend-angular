@@ -1,0 +1,18 @@
+<form class="toolbar__row" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="toolbar__search">
+    <mat-label>Buscar</mat-label>
+    <input matInput [formControl]="fc" placeholder="Nombre, email, área..." />
+  </mat-form-field>
+
+  <button mat-flat-button type="submit">
+    <mat-icon>search</mat-icon>
+    Buscar
+  </button>
+
+  <span class="spacer"></span>
+
+  <button mat-stroked-button type="button" (click)="onCreate()">
+    <mat-icon>person_add</mat-icon>
+    Nuevo contacto
+  </button>
+</form>

@@ -1,0 +1,15 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--app-surface);
+  box-shadow: var(--shadow-1);
+}
+.banner.-error {
+  border-left: 4px solid var(--app-danger);
+}
+.banner.-empty {
+  border-left: 4px solid var(--app-muted);
+}

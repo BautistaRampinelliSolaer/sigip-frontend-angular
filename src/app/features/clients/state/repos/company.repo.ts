@@ -4,9 +4,7 @@ import { Company, CreateCompanyRequest } from "@app/domain/models";
 import { CompanyApi } from "@app/infrastructure/api";
 import { RequestMeta, TTL_5_MINUTES } from "../_shared/request-state";
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class CompanyRepo extends EntityStore<Company> {
     private readonly api = inject(CompanyApi);
     readonly meta = signal<RequestMeta>({ status: 'idle', error: null, staleAt: null });

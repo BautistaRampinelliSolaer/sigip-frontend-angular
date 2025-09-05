@@ -5,7 +5,7 @@ import { PlantCompanyApi } from "@app/infrastructure/api";
 import { RequestMeta, TTL_5_MINUTES } from "../_shared/request-state";
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class PlantCompanyRepo extends EntityStore<PlantCompanyDTO> {
   private readonly api = inject(PlantCompanyApi);
   readonly meta = signal<RequestMeta>({ status: 'idle', error: null, staleAt: null });

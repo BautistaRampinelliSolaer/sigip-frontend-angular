@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ data ? 'Editar contacto' : 'Nuevo contacto' }}</h2>
+<div mat-dialog-content class="form-grid">
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre *</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="phone" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Celular</mat-label>
+    <input matInput formControlName="cellphone" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Interno</mat-label>
+    <input matInput formControlName="number_intern" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>País</mat-label>
+    <input matInput formControlName="country" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Ciudad</mat-label>
+    <input matInput formControlName="city" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="cancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid">
+    Guardar
+  </button>
+</div>

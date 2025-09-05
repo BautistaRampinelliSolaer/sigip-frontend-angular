@@ -7,9 +7,7 @@ export type ClientsTab = 'companies' | 'plants' | 'contacts';
 export type DetailKind = 'company' | 'plant' | 'contact' | null;
 
 // Single Source of Truth for UI State
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ClientsUiStore {
   private readonly companies = inject(CompanyRepo);
   private readonly plants = inject(PlantCompanyRepo);

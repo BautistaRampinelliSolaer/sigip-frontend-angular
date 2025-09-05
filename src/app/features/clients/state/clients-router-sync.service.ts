@@ -3,9 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClientsUiStore, DetailKind } from './clients-ui.store';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ClientsRouterSyncService {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);

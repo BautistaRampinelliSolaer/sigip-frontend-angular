@@ -1,0 +1,4 @@
+<div class="banner" [class.-empty]="state() === 'empty'" [class.-error]="state() === 'error'">
+  <mat-icon aria-hidden="true">{{ state() === 'error' ? 'error_outline' : 'info' }}</mat-icon>
+  <span>{{ message() }}</span>
+</div>

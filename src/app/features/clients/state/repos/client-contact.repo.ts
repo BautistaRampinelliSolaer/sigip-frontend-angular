@@ -4,7 +4,7 @@ import { ClientContactDTO, CreateClientContactRequest } from '@app/domain/models
 import { ClientContactApi } from '@app/infrastructure/api';
 import { RequestMeta, TTL_5_MINUTES } from '../_shared/request-state';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ClientContactRepo extends EntityStore<ClientContactDTO> {
   private readonly api = inject(ClientContactApi);
   readonly meta = signal<RequestMeta>({ status: 'idle', error: null, staleAt: null });
