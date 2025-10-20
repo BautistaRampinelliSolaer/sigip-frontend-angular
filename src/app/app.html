@@ -1,6 +1,19 @@
-<app-header></app-header>
-<main>
-  <router-outlet></router-outlet>
-  <mat-slide-toggle>Toggle me!</mat-slide-toggle>
-</main>
-<app-footer></app-footer>
+<mat-sidenav-container class="layout">
+  @if (auth.isLogged()) {
+    <mat-sidenav mode="side" [opened]="true" class="sidenav">
+      <app-sidenav 
+        [userName]="userName()"
+        (logout)="onLogout()"
+      />
+    </mat-sidenav>
+  }
+
+  <mat-sidenav-content class="content">
+    <mat-toolbar class="toolbar">
+      <img ngSrc="/assets/logo.svg" width="32" height="32" alt="Logo" priority />
+      <span class="brand">SIGIP</span>
+      <app-theme-switcher></app-theme-switcher>
+    </mat-toolbar>
+    <router-outlet/>
+  </mat-sidenav-content>
+</mat-sidenav-container>

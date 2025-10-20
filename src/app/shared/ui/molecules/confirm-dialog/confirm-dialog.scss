@@ -1,0 +1,29 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: #00000033;
+  display: grid;
+  place-items: center;
+}
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  min-width: 320px;
+  box-shadow: 0 10px 30px #0002;
+}
+.row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+.danger {
+  background: #b91c1c;
+  color: #fff;
+}
+button {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}

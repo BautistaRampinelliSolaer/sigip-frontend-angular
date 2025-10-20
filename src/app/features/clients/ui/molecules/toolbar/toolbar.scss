@@ -1,0 +1,16 @@
+.bar {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+}
+.right {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}

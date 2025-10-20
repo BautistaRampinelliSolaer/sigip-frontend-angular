@@ -1,0 +1,34 @@
+<form (ngSubmit)="submit()" [formGroup]="form" class="grid">
+  <label>
+    Proyecto
+    <select formControlName="projectId" required>
+      <option [ngValue]="null">Proyecto...</option>
+      @for (p of projects(); track p.id) {
+      <option [ngValue]="p.id">{{p.name}}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Fecha
+    <input type="date" formControlName="workDate" required />
+  </label>
+
+  <label>
+    Horas
+    <input type="number" formControlName="workedHours" step="0.25" min="0.25" required />
+  </label>
+
+  <label class="col-span">
+    descripción
+    <textarea
+      formControlName="description"
+      rows="3"
+      placeholder="Breve descripción de la tarea desarrollada"
+    ></textarea>
+  </label>
+
+  <div class="actions">
+    <button type="submit">Registrar</button>
+  </div>
+</form>

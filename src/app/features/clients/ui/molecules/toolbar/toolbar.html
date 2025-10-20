@@ -1,0 +1,16 @@
+<div class="bar">
+  <search-input [value]="search()" (valueChange)="searchChange.emit($event)" />
+  <div class="right">
+    <sort-select
+      [sortBy]="sortBy()"
+      [sortDir]="sortDir()"
+      (sortByChange)="sortByChange.emit($event)"
+      (sortDirChange)="sortDirChange.emit($event)"
+    />
+
+    <button mat-stroked-button color="primary">
+      <span class="material-symbols-outlined"><mat-icon>add</mat-icon></span>
+      Nuevo
+    </button>
+  </div>
+</div>

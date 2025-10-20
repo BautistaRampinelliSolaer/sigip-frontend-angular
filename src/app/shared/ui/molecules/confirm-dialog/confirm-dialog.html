@@ -1,0 +1,12 @@
+@if (open()) {
+<div class="backdrop" role="dialog" aria-modal="true">
+  <div class="card">
+    <h3>{{ title() }}</h3>
+    <p>{{ message() }}</p>
+    <div class="row">
+      <button (click)="cancel.emit()">{{ cancelText() }}</button>
+      <button class="danger" (click)="confirm.emit()">{{ confirmText() }}</button>
+    </div>
+  </div>
+</div>
+}

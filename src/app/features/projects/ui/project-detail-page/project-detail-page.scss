@@ -1,0 +1,20 @@
+.page {
+  display: grid;
+  gap: 1rem;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.row {
+  display: flex;
+  gap: 0.5rem;
+}
+.skeleton,
+.error,
+.empty {
+  padding: 0.75rem;
+  border: 1px dashed #ddd;
+  border-radius: 0.75rem;
+}

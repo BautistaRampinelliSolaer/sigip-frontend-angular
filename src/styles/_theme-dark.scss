@@ -1,0 +1,33 @@
+html.theme-dark {
+  --primary: #3a8cc4;
+  --secondary: #2b6a85;
+  --accent: #74a5c5;
+
+  --bg: #0b1117;
+  --surface: #0f1621;
+  --text: #e6edf3;
+  --muted: #9aa4b2;
+  --border: #263041;
+  --ring: #3a8cc4;
+
+  --primary-600: #58a1d0;
+  --primary-500: #3a8cc4;
+  --primary-400: #2d7bb3;
+  --surface-2: #121c29;
+}
+
+html.theme-dark {
+  /* ------- bridge a Angular Material M3 ------- */
+  --mat-sys-primary: var(--primary);
+  --mat-sys-on-primary: #0b1117; /* texto/icono sobre primary en dark */
+
+  --mat-sys-surface: var(--surface);
+  --mat-sys-on-surface: var(--text);
+  --mat-sys-surface-container: var(--surface-2);
+
+  --mat-sys-outline: var(--border);
+  --mat-sys-outline-variant: #334055;
+
+  --mat-sys-error: #f2b8b5; /* M3 dark error */
+  --mat-sys-on-error: #601410; /* M3 dark on-error */
+}

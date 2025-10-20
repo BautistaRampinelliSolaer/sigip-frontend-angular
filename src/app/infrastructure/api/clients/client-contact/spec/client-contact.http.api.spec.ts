@@ -17,7 +17,7 @@ describe('ClientContactHttpApi (específicos HTTP)', () => {
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(),
-        provideHttpClientTesting(),              
+        provideHttpClientTesting(),
         { provide: API_URL, useValue: 'http://test' },
         ClientContactHttpApi,
       ],
@@ -26,12 +26,24 @@ describe('ClientContactHttpApi (específicos HTTP)', () => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => httpMock.verify());       
+  afterEach(() => httpMock.verify());
 
   it('listAll() → GET /all y devuelve ClientContactDTO[]', async () => {
     const items: ClientContactDTO[] = [
-      { id: 1, name: 'Jorge', email: 'jorge@acme.test', company: { id: 1, name: 'Acme' }, plantCompany: { id: 1, name: 'Planta A' } },
-      { id: 2, name: 'María', email: 'maria@pm.test', company: { id: 2, name: 'PetroMax' }, plantCompany: null },
+      {
+        id: 1,
+        name: 'Jorge',
+        email: 'jorge@acme.test',
+        company: { id: 1, name: 'Acme' },
+        plantCompany: { id: 1, name: 'Planta A' },
+      },
+      {
+        id: 2,
+        name: 'María',
+        email: 'maria@pm.test',
+        company: { id: 2, name: 'PetroMax' },
+        plantCompany: null,
+      },
     ];
 
     const p = firstValueFrom(api.listAll());
@@ -46,7 +58,13 @@ describe('ClientContactHttpApi (específicos HTTP)', () => {
   });
 
   it('getById() → GET /:id y devuelve ClientContactDTO', async () => {
-    const dto: ClientContactDTO = { id: 42, name: 'Ana', email: 'ana@acme.test', company: { id: 1, name: 'Acme' }, plantCompany: null };
+    const dto: ClientContactDTO = {
+      id: 42,
+      name: 'Ana',
+      email: 'ana@acme.test',
+      company: { id: 1, name: 'Acme' },
+      plantCompany: null,
+    };
 
     const p = firstValueFrom(api.getById(42));
 
@@ -60,7 +78,15 @@ describe('ClientContactHttpApi (específicos HTTP)', () => {
   });
 
   it('listByCompany() → GET /listByCompany/:companyId', async () => {
-    const items: ClientContactDTO[] = [{ id: 7, name: 'Luis', email: 'luis@acme.test', company: { id: 1, name: 'Acme' }, plantCompany: null }];
+    const items: ClientContactDTO[] = [
+      {
+        id: 7,
+        name: 'Luis',
+        email: 'luis@acme.test',
+        company: { id: 1, name: 'Acme' },
+        plantCompany: null,
+      },
+    ];
 
     const p = firstValueFrom(api.listByCompany(1));
 
@@ -75,7 +101,13 @@ describe('ClientContactHttpApi (específicos HTTP)', () => {
 
   it('listByPlantCompany() → GET /listByPlantCompany/:plantCompanyId', async () => {
     const items: ClientContactDTO[] = [
-      { id: 9, name: 'Pedro', email: 'pedro@acme.test', company: { id: 1, name: 'Acme' }, plantCompany: { id: 3, name: 'Planta C' } },
+      {
+        id: 9,
+        name: 'Pedro',
+        email: 'pedro@acme.test',
+        company: { id: 1, name: 'Acme' },
+        plantCompany: { id: 3, name: 'Planta C' },
+      },
     ];
 
     const p = firstValueFrom(api.listByPlantCompany(3));
@@ -115,15 +147,24 @@ describe('ClientContactHttpApi (específicos HTTP)', () => {
     expect('id' in (req.request.body as object)).toBe(false);
     expect(req.request.body).toEqual(reqBody);
 
-    req.flush({ status: 'OK', message: 'created', data: returned } as ApiResponse<ClientContactDTO>);
+    req.flush({
+      status: 'OK',
+      message: 'created',
+      data: returned,
+    } as ApiResponse<ClientContactDTO>);
 
     await expect(p).resolves.toEqual(returned);
   });
 
   it('update() → PUT /update con {id, ...dto} (parcial) y retorna DTO actualizado', async () => {
-    const patch: Partial<CreateClientContactRequest> = { phone: '+54 221 000 0000', city: 'CABA' };
+    const patch: Partial<ClientContactDTO> = { phone: '+54 221 000 0000', city: 'CABA' };
     const updated: ClientContactDTO = {
-      id: 10, name: 'Julián', phone: '+54 221 000 0000', city: 'CABA', company: null, plantCompany: null,
+      id: 10,
+      name: 'Julián',
+      phone: '+54 221 000 0000',
+      city: 'CABA',
+      company: null,
+      plantCompany: null,
     };
 
     const p = firstValueFrom(api.update(10, patch));
@@ -155,7 +196,10 @@ describe('ClientContactHttpApi (específicos HTTP)', () => {
     const req = httpMock.expectOne(`${BASE}/999`);
     expect(req.request.method).toBe('GET');
 
-    req.flush({ status: 'ERR', message: 'not found', data: null }, { status: 404, statusText: 'Not Found' });
+    req.flush(
+      { status: 'ERR', message: 'not found', data: null },
+      { status: 404, statusText: 'Not Found' },
+    );
 
     await expect(p).rejects.toMatchObject({ status: 404 });
   });
@@ -166,7 +210,10 @@ describe('ClientContactHttpApi (específicos HTTP)', () => {
     const req = httpMock.expectOne(`${BASE}/create`);
     expect(req.request.method).toBe('POST');
 
-    req.flush({ status: 'ERR', message: 'validation error', data: null }, { status: 400, statusText: 'Bad Request' });
+    req.flush(
+      { status: 'ERR', message: 'validation error', data: null },
+      { status: 400, statusText: 'Bad Request' },
+    );
 
     await expect(p).rejects.toMatchObject({ status: 400 });
   });

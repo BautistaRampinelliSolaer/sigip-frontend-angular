@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { ApiResponse, DocumentDTO } from "@app/domain/models";
-import { CreateDocumentRequest } from "@app/domain/models/documents/create-document-request";
+import { ApiResponse, CreateDocumentRequest, DocumentDTO } from "@app/domain/models";
 import { ENV } from "@core/config/environment-token";
 import { map } from "rxjs";
 

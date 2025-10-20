@@ -11,7 +11,7 @@ export function sharedClientContactApiSpec(factory: () => ClientContactApi) {
       expect(Array.isArray(res)).toBe(true);
     });
 
-    it('create → getById → update → delete (flujo feliz)', async () => {
+    it('create -> getById -> update -> delete', async () => {
       const api = factory();
 
       // create
@@ -34,13 +34,13 @@ export function sharedClientContactApiSpec(factory: () => ClientContactApi) {
       await expect(firstValueFrom(api.getById(created.id))).rejects.toBeDefined();
     });
 
-    it('listByCompany: devuelve array (puede ser vacío)', async () => {
+    it('listByCompany: return array (it can be empty)', async () => {
       const api = factory();
       const res = await firstValueFrom(api.listByCompany(1));
       expect(Array.isArray(res)).toBe(true);
     });
 
-    it('listByPlantCompany: devuelve array (puede ser vacío)', async () => {
+    it('listByPlantCompany: return array (it can be empty)', async () => {
       const api = factory();
       const res = await firstValueFrom(api.listByPlantCompany(1));
       expect(Array.isArray(res)).toBe(true);

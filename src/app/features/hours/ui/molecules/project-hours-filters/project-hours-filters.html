@@ -1,0 +1,64 @@
+<section>
+  <div class="row">
+    <label>
+      Proyecto
+      <select
+        #projectSel
+        [value]="selectedProjectId() ?? ''"
+        (change)="setProject(projectSel.value)"
+      >
+        <option value="">Todos</option>
+        @for (p of projects(); track p.id) {
+          <option [value]="p.id">{{ p.name }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Usuario
+      <select
+        #userSel
+        [value]="selectedUserId() ?? ''"
+        (change)="setUser(userSel.value)"
+      >
+        <option value="">Todos</option>
+        @for (u of users(); track u.id) {
+          <option [value]="u.id">{{ u.name }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Desde
+      <input
+        #fromInput
+        type="date"
+        [value]="from() ?? ''"
+        (change)="from.set(fromInput.value || null)"
+      />
+    </label>
+
+    <label>
+      Hasta
+      <input
+        #toInput
+        type="date"
+        [value]="to() ?? ''"
+        (change)="to.set(toInput.value || null)"
+      />
+    </label>
+
+    <button type="button" (click)="applyDates()">Aplicar</button>
+    <button type="button" (click)="clearDates()">Limpiar</button>
+  </div>
+
+  <div class="row">
+    <input
+      #qInput
+      placeholder="Buscar por descripción/proyecto/usuario…"
+      [value]="q()"
+      (input)="q.set(qInput.value)"
+    />
+    <button type="button" (click)="applySearch()">Buscar</button>
+  </div>
+</section>

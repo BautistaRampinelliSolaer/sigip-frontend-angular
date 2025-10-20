@@ -1,0 +1,38 @@
+html,
+html.theme-light {
+  --primary: #1e6499;
+  --secondary: #004264;
+  --accent: #74a5c5;
+
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #0b1220;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --ring: #1e6499;
+
+  /* derivados útiles */
+  --primary-600: #155a8d;
+  --primary-500: #1e6499;
+  --primary-400: #2d7bb3;
+  --surface-2: #f3f4f6;
+}
+
+html,
+html.theme-light {
+  /* ------- bridge a Angular Material M3 ------- */
+  --mat-sys-primary: var(--primary);
+  --mat-sys-on-primary: #ffffff;
+
+  --mat-sys-surface: var(--surface);
+  --mat-sys-on-surface: var(--text);
+  --mat-sys-surface-container: var(--surface-2);
+
+  /* Bordes / outline (usar tu border neutral) */
+  --mat-sys-outline: var(--border);
+  --mat-sys-outline-variant: #d5dae1;
+
+  /* Error (pares recomendados por M3) */
+  --mat-sys-error: #b3261e;
+  --mat-sys-on-error: #ffffff;
+}

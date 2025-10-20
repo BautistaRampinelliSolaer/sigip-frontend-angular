@@ -1,0 +1,10 @@
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 220px 220px;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-4) 0;
+}
+
+.field {
+  width: 100%;
+}

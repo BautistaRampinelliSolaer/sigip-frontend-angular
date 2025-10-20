@@ -1,0 +1,15 @@
+.error {
+  border: 1px solid var(--mat-sys-error);
+  color: var(--mat-sys-on-surface);
+  background: color-mix(in oklab, var(--mat-sys-error) 10%, var(--mat-sys-surface));
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+
+.error h3 {
+  margin: 0 0 var(--space-2);
+}
+
+.error p {
+  margin: 0 0 var(--space-4);
+}

@@ -1,0 +1,8 @@
+<section class="empty">
+  <div class="art" aria-hidden="true">☁</div>
+  <h3>{{ title() }}</h3>
+  @if (message()) {
+  <p>{{ message() }}</p>
+  }
+  <ng-content select="[actions]"></ng-content>
+</section>

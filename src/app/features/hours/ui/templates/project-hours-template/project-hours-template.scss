@@ -1,0 +1,20 @@
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1rem;
+}
+.panel {
+  background-color: 1E6499;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  display: grid;
+  gap: .75rem;
+  padding: 1rem;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: .75rem;
+}
+.content {
+  display: grid;
+  gap: 1rem;
+}

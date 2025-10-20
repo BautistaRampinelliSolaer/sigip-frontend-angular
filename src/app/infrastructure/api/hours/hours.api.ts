@@ -1,9 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { API_URL } from "@app/core/http/api.tokens";
-import { ApiResponse } from "@app/domain/models";
-import { CreateProjectHoursRequest } from "@app/domain/models/hours/create-project-hours-request";
-import { ProjectHoursDTO } from "@app/domain/models/hours/project-hours-dto";
+import { ApiResponse, CreateProjectHoursRequest } from "@app/domain/models";
+import { ProjectHoursDTO } from "@app/domain/models";
 
 @Injectable({
   providedIn: 'root'

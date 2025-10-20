@@ -6,7 +6,7 @@ import { AuthService } from "./auth.service";
 export function attemptedUrl(segments: UrlSegment[], router: Router): string {
     const tree = router.createUrlTree(['/', ...segments.map(s => s.path)]);
     return router.serializeUrl(tree);
-};
+}
 
 /** Guard for private routes: allow only if authenticated, otherwise redirect to /login?returnUrl=... */
 export const authGuard: CanMatchFn = (_route, segments) => {
@@ -24,6 +24,5 @@ export const authGuard: CanMatchFn = (_route, segments) => {
 export const loginBlockGuard: CanMatchFn = () => {
     const auth = inject(AuthService);
     const router = inject(Router);
-
     return auth.isLogged() ? router.createUrlTree(['/']) : true;
 }

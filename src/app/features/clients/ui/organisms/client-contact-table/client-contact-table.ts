@@ -15,14 +15,11 @@ import { MatButtonModule } from '@angular/material/button';
   host: { class: 'client-contact-table' },
 })
 export class ClientContactTable {
-  readonly contacts = input<ClientContactDTO[]>([]);
-  readonly sortChange = output<Sort>();
-  readonly edit = output<ClientContactDTO>();
-  readonly remove = output<void>();
+  readonly items = input.required<ClientContactDTO[]>();
+  readonly rowClick = output<number>();
+  protected displayed = ['name', 'company', 'plant', 'email', 'phone'];
 
-  protected readonly displayed = ['name', 'email', 'phone', 'company', 'plant', 'actions'];
-
-  onSortChange(sort: Sort) {
-    this.sortChange.emit(sort);
+  protected open(id: number) {
+    this.rowClick.emit(id);
   }
 }

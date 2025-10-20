@@ -1,89 +1,79 @@
-<section class="clients-header">
-  <mat-button-toggle-group
-    [value]="viewMode()"
-    (change)="viewMode.set($any($event.value))"
-    aria-label="Vistas"
-  >
-    <mat-button-toggle value="all">Ver 3 tablas</mat-button-toggle>
-    <mat-button-toggle value="companies">Empresas</mat-button-toggle>
-    <mat-button-toggle value="plants">Plantas</mat-button-toggle>
-    <mat-button-toggle value="contacts">Contactos</mat-button-toggle>
-  </mat-button-toggle-group>
+<section class="header">
+  <h1>Clientes</h1>
+  <app-breadcrumbs [trail]="breadcrumb()"></app-breadcrumbs>
 </section>
 
-<section class="clients-grid">
-  @if (showCompanies()) {
-  <mat-card class="block">
-    <mat-card-header>
-      <mat-card-title>Empresas</mat-card-title>
-    </mat-card-header>
+<clients-toolbar
+  [search]="search()"
+  [sortBy]="sortBy()"
+  [sortDir]="sortDir()"
+  (searchChange)="search.set($event)"
+  (sortByChange)="sortBy.set($event)"
+  (sortDirChange)="sortDir.set($event)"
+>
+</clients-toolbar>
 
-    <mat-card-content>
-      <app-data-grid
-        [data]="companies()"
-        [columns]="companyCols"
-        [detailTemplate]="companyDetail"
-        (rowClick)="openCompany($event)"
-      />
-    </mat-card-content>
-  </mat-card>
-  } @if (showPlants()) {
-  <mat-card class="block">
-    <mat-card-header>
-      <mat-card-title>Plantas</mat-card-title>
-    </mat-card-header>
+<!-- Tabs -->
+<nav class="tabs" role="tablist">
+  <button role="tab" [class.active]="activeTab()==='companies'" (click)="onTab('companies')">
+    Empresas
+  </button>
+  <button role="tab" [class.active]="activeTab()==='plants'" (click)="onTab('plants')">
+    Plantas
+  </button>
+  <button role="tab" [class.active]="activeTab()==='contacts'" (click)="onTab('contacts')">
+    Contactos
+  </button>
+</nav>
 
-    <mat-card-content>
-      <app-data-grid
-        [data]="plants()"
-        [columns]="plantCols"
-        [detailTemplate]="plantDetail"
-        (rowClick)="openPlant($event)"
-      />
-    </mat-card-content>
-  </mat-card>
-  } @if (showContacts()) {
-  <mat-card class="block">
-    <mat-card-header>
-      <mat-card-title>Contactos</mat-card-title>
-    </mat-card-header>
+<div class="content">
+  @switch (activeTab()) { @case ('companies') {
+  <companies-table [items]="companies()" (rowClick)="openCompany($event)"> </companies-table>
+  } @case ('plants') {
+  <plants-table [items]="plants()" (rowClick)="openPlant($event)"> </plants-table>
+  } @case ('contacts') {
+  <app-client-contact-table [items]="contacts()" (rowClick)="openContact($event)">
+  </app-client-contact-table>
+  } }
+</div>
 
-    <mat-card-content>
-      <app-data-grid
-        [data]="contacts()"
-        [columns]="contactCols"
-        [detailTemplate]="contactDetail"
-        (rowClick)="openContact($event)"
-      />
-    </mat-card-content>
-  </mat-card>
-  }
-</section>
+<!-- Detail drawer -->
+<aside class="drawer" [class.open]="hasDetail()">
+  <header class="drawer-head">
+    <button type="button" (click)="backToList()" aria-label="Cerrar">
+      <span class="material-symbols-outlined"><mat-icon>arrow_back</mat-icon></span>
+    </button>
+    <h3>
+      @if (detailKind()==='company') { {{ selectedCompany()?.name }} } @if (detailKind()==='plant')
+      { {{ selectedPlant()?.name }} } @if (detailKind()==='contact') { {{ selectedContact()?.name }}
+      }
+    </h3>
+  </header>
 
-<!-- Detail templates -->
-<ng-template #companyDetail let-row>
-  <div class="detail">
-    <div><b>Industria:</b> {{ row.industry }}</div>
-    <div><b>Grupo:</b> {{ row.group }}</div>
-    <div><b>Plantas:</b> {{ row.plants?.length ?? 0 }}</div>
-    <div><b>Contactos:</b> {{ row.contacts?.length ?? 0 }}</div>
+  <div class="drawer-body">
+    @if (detailKind()==='company' && selectedCompany(); as c) {
+    <div class="grid">
+      <div><strong>Comercial:</strong> {{ c.commercialName || '—' }}</div>
+      <div><strong>Industria:</strong> {{ c.industry || '—' }}</div>
+      <div><strong>Grupo:</strong> {{ c.group || '—' }}</div>
+    </div>
+    } @if (detailKind()==='plant' && selectedPlant(); as p) {
+    <div class="grid">
+      <div><strong>Empresa:</strong> {{ p.company?.name || '—' }}</div>
+      <div><strong>Ciudad:</strong> {{ p.city || '—' }}</div>
+      <div><strong>Teléfono:</strong> {{ p.phone || '—' }}</div>
+      <div><strong>Email:</strong> {{ p.email || '—' }}</div>
+    </div>
+    } @if (detailKind()==='contact' && selectedContact(); as ct) {
+    <div class="grid">
+      <div><strong>Empresa:</strong> {{ ct.company?.name || '—' }}</div>
+      <div><strong>Planta:</strong> {{ ct.plantCompany?.name || '—' }}</div>
+      <div><strong>Email:</strong> {{ ct.email || '—' }}</div>
+      <div><strong>Tel.:</strong> {{ ct.phone || ct.cellphone || '—' }}</div>
+      <div><strong>Interno:</strong> {{ ct.number_intern || '—' }}</div>
+      <div><strong>Ciudad:</strong> {{ ct.city || '—' }}</div>
+      <div><strong>País:</strong> {{ ct.country || '—' }}</div>
+    </div>
+    }
   </div>
-</ng-template>
-
-<ng-template #plantDetail let-row>
-  <div class="detail">
-    <div><b>Empresa:</b> {{ row.company?.name }}</div>
-    <div><b>País/Ciudad:</b> {{ row.country }} / {{ row.city }}</div>
-    <div><b>Contactos:</b> {{ row.contacts?.length ?? 0 }}</div>
-  </div>
-</ng-template>
-
-<ng-template #contactDetail let-row>
-  <div class="detail">
-    <div><b>Email:</b> {{ row.email }}</div>
-    <div><b>Tel:</b> {{ row.phone }}</div>
-    <div><b>Empresa:</b> {{ row.company?.name }}</div>
-    <div><b>Planta:</b> {{ row.plantCompany?.name }}</div>
-    <div><b>Ubicación:</b> {{ row.country }} - {{ row.city }}</div>
-  </div>
-</ng-template>
+</aside>

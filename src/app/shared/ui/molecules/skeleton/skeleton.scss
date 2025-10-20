@@ -1,0 +1,30 @@
+.skeleton {
+  --skel-bg: color-mix(in oklab, var(--mat-sys-surface) 85%, var(--mat-sys-on-surface));
+  --skel-sh: linear-gradient(90deg, #0000, #0002 40%, #0000 80%);
+  background: var(--skel-bg);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--mat-sys-outline);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--skel-sh);
+  animation: skel 1.2s infinite;
+}
+
+.rounded {
+  border-radius: var(--radius-lg);
+}
+
+@keyframes skel {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

@@ -1,0 +1,12 @@
+ol {
+  display: flex;
+  gap: var(--space-1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+.crumb {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}

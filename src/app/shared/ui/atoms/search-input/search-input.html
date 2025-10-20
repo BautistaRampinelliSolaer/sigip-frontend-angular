@@ -1,0 +1,14 @@
+<div class="field">
+  <span class="icon material-symbols-outlined" aria-hidden="true"><mat-icon>search</mat-icon></span>
+  <input
+    type="search"
+    [value]="buffer()"
+    [attr.placeholder]="placeholder()"
+    (input)="onInput(($any($event.target)).value)"
+    aria-label="Buscar"
+  />
+  @if (buffer()) {
+  <button class="clear" type="button" (click)="clear()" aria-label="Limpiar Búsqueda">
+  </button>
+  }
+</div>

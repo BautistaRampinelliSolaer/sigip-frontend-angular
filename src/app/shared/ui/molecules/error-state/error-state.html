@@ -1,0 +1,7 @@
+<section class="error" role="alert" aria-live="polite">
+  <h3>{{ title() }}</h3>
+  @if (message()) {
+  <p>{{message()}}</p>
+  }
+  <button class="btn outline" (click)="retry.emit()">Reintentar</button>
+</section>

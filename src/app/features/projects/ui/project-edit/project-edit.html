@@ -1,0 +1,11 @@
+<section class="container card">
+    <h1>Editar Proyecto</h1>
+    @if (loading()) {
+        <app-skeleton height="140px"/>
+    } @else if (error()) {
+        <app-error-state [message]="error() ?? ''" (retry)="reload()"/>
+    } @else {
+        @let p = project();
+        <project-form [project]="p" (submit)="save($event)" (cancel)="back()"/>
+    }
+</section>

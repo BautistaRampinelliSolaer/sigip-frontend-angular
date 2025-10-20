@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: "http://<IP_SERVER>:<PORT>/api"
+  useMocks: true,   // ← activá/desactivá los mocks desde acá
 };

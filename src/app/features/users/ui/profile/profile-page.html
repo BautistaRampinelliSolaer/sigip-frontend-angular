@@ -1,0 +1,52 @@
+<section class="profile">
+  @if (isLogged()) {
+  <mat-card class="card">
+    <div class="header">
+      @if (user()?.profilePhoto) {
+      <img
+        class="avatar"
+        [src]="user()!.profilePhoto!"
+        [alt]="`Foto de Perfil de ${fullName()}.`"
+        width="96"
+        height="96"
+      />
+      } @else {
+      <div class="avatar initials">{{ initials() }}</div>
+      }
+
+      <div class="meta">
+        <h1 class="title">{{fullName()}}</h1>
+        <p class="username">{{user()?.username}}</p>
+        <mat-chip-set class="chips">
+          <mat-chip appearence="outlined">{{ roleLabel() }}</mat-chip>
+        </mat-chip-set>
+      </div>
+
+      <div class="actions">
+        <button mat-stroked-button (click)="refresh()">Actualizar</button>
+        <button mat-flat-button color="warn" (click)="logout()">Cerrar Sesión</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="item">
+        <label>Correo</label>
+        <span>{{user()?.email}}</span>
+      </div>
+      <div class="item">
+        <label>Horas por día</label>
+        <span>{{ user()?.workingHours ?? '-'}}</span>
+      </div>
+      <div class="item">
+        <label>Usuario</label>
+        <span>{{user()?.username}}</span>
+      </div>
+    </div>
+  </mat-card>
+  } @else {
+  <mat-card class="empty">
+    <p>No hay sesión activa.</p>
+    <a mat-stroked-button routerLink="/login" color="primary">Ir a Iniciar sesión</a>
+  </mat-card>
+  }
+</section>

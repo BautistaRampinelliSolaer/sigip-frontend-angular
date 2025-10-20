@@ -1,0 +1,47 @@
+<section>
+  @if (data.loading()) {
+  <p class="muted">Cargando...</p>
+  } @else if (data.error()) {
+  <p class="error">{{data.error()}}</p>
+  } @else {
+  <table>
+    <thead>
+      <tr>
+        <th><button (click)="toggleSort('workDate')">Fecha</button></th>
+        <th>Proyecto</th>
+        <th>Usuario</th>
+        <th><button (click)="toggleSort('workedHours')">Horas</button></th>
+        <th>descripción</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (it of ui.paged(); track it.id) {
+      <tr (click)="ui.select(it.id)" [class.selected]="ui.selectedId() === it.id">
+        <td>{{ it.workDate }}</td>
+        <td>{{ it.project.name }}</td>
+        <td>{{ it.user.name }}</td>
+        <td class="mono">{{ it.workedHours }}</td>
+        <td class="desc">{{ it.description }}</td>
+        <td class="actions">
+          <button type="button" (click)="$event.stopPropagation(); delete(it.id)">🗑</button>
+        </td>
+      </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="6">
+          <div class="pager">
+            <button (click)="prevPage()">Anterior</button>
+            <span>Página {{ ui.pageIndex() + 1 }} / {{ ui.pageCount() }}</span>
+            <button (click)="nextPage()">Siguiente</button>
+            <span class="spacer"></span>
+            <span>Total filtrado: <strong>{{ ui.totalHoursFiltered() }} h</strong></span>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  }
+</section>

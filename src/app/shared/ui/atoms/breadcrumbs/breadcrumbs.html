@@ -1,0 +1,10 @@
+<nav aria-label="Ruta seleccionada">
+  <ol>
+    @for (crumb of trail(); track $index) {
+    <li>
+      <span class="material-symbols-outlined" aria-hidden="true"><mat-icon>chevron_right</mat-icon></span>
+      <span class="crumb">{{ crumb }}</span>
+    </li>
+    }
+  </ol>
+</nav>

@@ -1,0 +1,11 @@
+<section class="layout">
+  <aside class="panel">
+    <h3>Registrar horas</h3>
+    <app-project-hours-form [projects]="projects()" [users]="users()" />
+  </aside>
+
+  <main class="content">
+    <app-project-hours-filters [projects]="projects()" [users]="users()" />
+    <app-project-hours-table />
+  </main>
+</section>

@@ -1,0 +1,29 @@
+<div class="filters">
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Buscar</mat-label>
+    <input matInput placeholder="Código, nombre..." [formControl]="form.controls.q" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Estado</mat-label>
+    <mat-select [formControl]="form.controls.state">
+      <mat-option value="">Todos</mat-option>
+      <mat-option value="UNASSIGNED">SIN ASIGNAR</mat-option>
+      <mat-option value="NOT_STARTED">SIN EMPEZAR</mat-option>
+      <mat-option value="IN_PROGRESS">EN PROCESO</mat-option>
+      <mat-option value="CANCELLED">CANCELADO</mat-option>
+      <mat-option value="INACTIVE">INACTIVO</mat-option>
+      <mat-option value="UNDEFINED">SIN DEFINICIÓN</mat-option>
+      <mat-option value="TO_REVIEW">PARA REVISAR</mat-option>
+      <mat-option value="TO_CORRECT">CORREGIR</mat-option>
+      <mat-option value="RELEASED">LIBERADO</mat-option>
+      <mat-option value="SENT">ENVIADO</mat-option>
+      <mat-option value="ISSUED">EMITIDO</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Responsable</mat-label>
+    <input matInput type="number" placeholder="ID" [formControl]="form.controls.responsibleId" />
+  </mat-form-field>
+</div>

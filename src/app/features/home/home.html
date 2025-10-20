@@ -1,6 +1,50 @@
 <app-header title="Home">
-    <span class="hint">Últimos proyectos / horas cargadas / documentos (+v1.2)</span>
+  <span class="hint">Últimos proyectos / horas cargadas / documentos (+v1.2)</span>
 </app-header>
 <section class="grid">
-    <div class="box">Widgets futuros...</div>
+  <app-theme-switcher></app-theme-switcher>
+  <article class="card demo-card">
+    <h1>Demo de temas</h1>
+    <p>
+      Este bloque usa <code>--surface</code>, <code>--border</code>, <code>--text</code> y el botón
+      usa <code>--primary</code>.
+    </p>
+    <div class="buttons">
+      <button class="btn">Acción primaria</button>
+      <button class="btn ghost">Acción secundaria</button>
+      <button class="btn outline">Acción alternativa</button>
+    </div>
+  </article>
+  <section class="container mat-demo">
+    <h2>Material + Tokens</h2>
+    <div class="row">
+      <button mat-flat-button>Primario</button>
+      <button mat-stroked-button>Stroked</button>
+      <button mat-button>Text</button>
+      <mat-slide-toggle>Opción</mat-slide-toggle>
+    </div>
+
+    <mat-form-field appearence="outline" class="field">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Tu nombre" />
+    </mat-form-field>
+  </section>
+
+  <section class="card">
+    <app-skeleton height="2.5rem"></app-skeleton>
+    <app-skeleton height="2.5rem"></app-skeleton>
+  </section>
+
+  <section class="card">
+    <app-empty-state title="Sin resultados" message="Probá cambiar los filtros">
+      <div actions>
+        <button class="btn outline">Limpiar filtros</button>
+      </div>
+    </app-empty-state>
+  </section>
+
+  <section class="card">
+    <app-error-state message="No se cargaron correctamente los proyectos." (retry)="load()" />
+  </section>
+  <div class="box">Widgets futuros...</div>
 </section>

@@ -1,0 +1,17 @@
+<div class="wrap">
+  <label>Ordenar por:</label>
+  <select #sel [value]="sortBy()" (change)="onKeyChange(sel.value)">
+    <option value="name">Nombre</option>
+    <option value="industry">Industria</option>
+    <option value="city">Ciudad</option>
+    <option value="company">Empresa</option>
+  </select>
+  <button
+    class="dir"
+    type="button"
+    (click)="toggleDir()"
+    [attr.aria-label]="'Dirección '+sortDir()"
+  >
+    <span class="material-symbols-outlined"> <mat-icon>{{ sortDir() === 'asc' ? 'south' : 'north'}}</mat-icon> </span>
+  </button>
+</div>

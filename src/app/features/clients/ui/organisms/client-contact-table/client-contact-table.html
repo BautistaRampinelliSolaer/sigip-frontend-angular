@@ -1,17 +1,9 @@
-<table mat-table [dataSource]="contacts()" matSort (matSortChange)="onSortChange($event)">
+<table mat-table [dataSource]="items()">
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-    <td mat-cell *matCellDef="let c">{{c.name}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email</th>
-    <td mat-cell *matCellDef="let c">{{ c.email || '—' }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="phone">
-    <th mat-header-cell *matHeaderCellDef>Teléfono</th>
-    <td mat-cell *matCellDef="let c">{{ c.phone || c.cellphone || '—' }}</td>
+    <th mat-header-cell *matHeaderCellDef>Contacto</th>
+    <td mat-cell *matCellDef="let c">
+      <button class="link" (click)="open(c.id)">{{ c.name }}</button>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="company">
@@ -24,18 +16,16 @@
     <td mat-cell *matCellDef="let c">{{ c.plantCompany?.name || '—' }}</td>
   </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let c">
-      <button mat-icon-button (click)="edit.emit(c)" aria-label="Editar">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-icon-button (click)="remove.emit(c)" aria-label="Eliminar">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let c">{{ c.email || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+    <td mat-cell *matCellDef="let c">{{ c.phone || c.cellphone || '—' }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayed"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayed"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayed;"></tr>
 </table>

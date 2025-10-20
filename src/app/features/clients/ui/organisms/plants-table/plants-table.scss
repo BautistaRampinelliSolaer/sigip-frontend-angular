@@ -1,0 +1,27 @@
+/* igual estilo que companies */
+table {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+th {
+  background: var(--surface-2);
+  color: var(--muted);
+  font-weight: 600;
+}
+td,
+th {
+  padding: var(--space-3) var(--space-4);
+}
+.link {
+  background: transparent;
+  border: 0;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+.link:hover {
+  text-decoration: underline;
+}

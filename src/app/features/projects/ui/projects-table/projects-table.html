@@ -1,0 +1,24 @@
+<div class="toolbar">
+    <button mat-stroked-button [matMenuTriggerFor]="menu">
+    <mat-icon>view_column</mat-icon>
+    Columnas
+</button>
+<mat-menu #menu="matMenu">
+    @for (c of allColumns; track c.key) {
+        <button mat-menu-item (click)="$event.stopPropagation()">
+            <mat-checkbox [checked]="selectedKeys().includes(c.key)"
+            (change)="toggleKey(c.key)">
+            {{ c.header}}
+            </mat-checkbox>
+        </button>
+    }
+</mat-menu>
+</div>
+
+<app-data-table
+    [columns]="columns()"
+    [data]="data()"
+    [loading]="loading()"
+    [error]="error()"
+    (rowClick)="openDetail($event)"
+/>

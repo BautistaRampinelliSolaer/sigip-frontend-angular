@@ -1,7 +1,7 @@
 import { ObjectMiniDTO } from "../common/object-mini-dto";
 import { ProjectMiniDTO } from "./project";
 
-export interface projectHoursDTO {
+export interface ProjectHoursDTO {
     id: number;
     project: ProjectMiniDTO;
     user: ObjectMiniDTO;
@@ -10,7 +10,7 @@ export interface projectHoursDTO {
     description: string;
 }
 
-export interface createProjectHoursRequest {
+export interface CreateProjectHoursRequest {
     projectId: number;
     userId: number;
     workedHours: number;

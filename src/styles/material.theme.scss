@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+
+$sys-theme: mat.define-theme((
+    color: (
+        use-system-variables: true,
+    ),
+    typography: (
+        use-system-variables: true,
+    ),
+    density: (
+        scale: -1,
+    ),
+));
+
+// Styles for all components based on system toekens
+:root {
+    @include mat.all-component-themes($sys-theme);
+}

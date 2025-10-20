@@ -1,0 +1,24 @@
+.empty {
+  border: 1px dashed var(--mat-sys-outline);
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  text-align: center;
+}
+
+.empty .art {
+  font-size: 3rem;
+  opacity: 0.5;
+  margin-bottom: var(--space-4);
+}
+
+.empty h3 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--fs-xl);
+}
+
+.empty p {
+  margin: 0 0 var(--space-4);
+  color: var(--muted);
+}

@@ -1,0 +1,44 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  vertical-align: top;
+}
+thead th {
+  text-align: left;
+}
+thead th button {
+  all: unset;
+  cursor: pointer;
+  font-weight: 600;
+}
+tr.selected {
+  background: rgba(0, 120, 255, 0.05);
+}
+.mono {
+  font-variant-numeric: tabular-nums;
+}
+.desc {
+  max-width: 48ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pager .spacer {
+  flex: 1;
+}
+.muted {
+  color: #6b7280;
+}
+.error {
+  color: #b00020;
+}

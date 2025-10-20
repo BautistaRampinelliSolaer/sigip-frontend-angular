@@ -2,16 +2,25 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { ClientsUiStore } from '../state/clients-ui.store';
-
-// Nuestro organism reusado
-import { DataGrid } from '@shared/ui/organisms/data-grid/data-grid';
-import { ColumnDef } from '@shared/ui/models/data-grid';
-
-type ViewMode = 'all' | 'companies' | 'plants' | 'contacts';
+import { BreadcrumbsComponent } from '@app/shared/ui';
+import { ClientsToolbar } from '../ui/molecules/toolbar/toolbar';
+import { CompaniesTable } from '../ui/organisms/companies-table/table';
+import { PlantsTableComponent } from '../ui/organisms/plants-table/plants-table';
+import { ClientContactTable } from '../ui/organisms/client-contact-table/client-contact-table';
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'clients-page',
-  imports: [MatButtonToggleModule, MatCardModule, DataGrid],
+  imports: [
+    MatButtonToggleModule,
+    MatCardModule,
+    BreadcrumbsComponent,
+    ClientsToolbar,
+    CompaniesTable,
+    PlantsTableComponent,
+    ClientContactTable,
+    MatIconModule
+],
   templateUrl: './clients-page.html',
   styleUrls: ['./clients-page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,48 +28,35 @@ type ViewMode = 'all' | 'companies' | 'plants' | 'contacts';
 export class ClientsPage {
   private readonly ui = inject(ClientsUiStore);
 
-  // modo de visualización: 3 tablas o maximizar una
-  readonly viewMode = signal<ViewMode>('all');
+  // bind UI store signals
+  protected readonly activeTab = this.ui.activeTab;
+  protected readonly breadcrumb = this.ui.breadcrumb;
 
-  // Datos provenientes del store (ya filtrados/ordenados por tus signals)
-  readonly companies = this.ui.companiesView;
-  readonly plants = this.ui.plantsView;
-  readonly contacts = this.ui.contactsView;
+  protected readonly search = this.ui.search;
+  protected readonly sortBy = this.ui.sortBy;
+  protected readonly sortDir = this.ui.sortDir;
 
-  // Columnas para cada entidad (muestran nested.name cuando corresponde)
-  readonly companyCols: ColumnDef<any>[] = [
-    { id: 'name', header: 'Empresa', accessor: (r) => r.name, sortable: true, widthPx: 220 },
-    { id: 'industry', header: 'Industria', accessor: (r) => r.industry, sortable: true },
-    { id: 'group', header: 'Grupo', accessor: (r) => r.group, sortable: true },
-  ];
+  // views
+  protected readonly companies = this.ui.companiesView;
+  protected readonly plants = this.ui.plantsView;
+  protected readonly contacts = this.ui.contactsView;
 
-  readonly plantCols: ColumnDef<any>[] = [
-    { id: 'name', header: 'Planta', accessor: (r) => r.name, sortable: true, widthPx: 220 },
-    { id: 'company', header: 'Empresa', accessor: (r) => r.company?.name, sortable: true },
-    { id: 'country', header: 'País', accessor: (r) => r.country, sortable: true },
-    { id: 'city', header: 'Ciudad', accessor: (r) => r.city, sortable: true },
-  ];
+  // detail selection (drawer)
+  protected readonly detailKind = this.ui.detailKind;
+  protected readonly selectedCompany = this.ui.selectedCompany;
+  protected readonly selectedPlant = this.ui.selectedPlant;
+  protected readonly selectedContact = this.ui.selectedContact;
 
-  readonly contactCols: ColumnDef<any>[] = [
-    { id: 'name', header: 'Contacto', accessor: (r) => r.name, sortable: true, widthPx: 220 },
-    { id: 'email', header: 'Email', accessor: (r) => r.email, sortable: true },
-    { id: 'phone', header: 'Teléfono', accessor: (r) => r.phone, sortable: true },
-    { id: 'company', header: 'Empresa', accessor: (r) => r.company?.name, sortable: true },
-    { id: 'plant', header: 'Planta', accessor: (r) => r.plantCompany?.name, sortable: true },
-    { id: 'city', header: 'Ciudad', accessor: (r) => r.city, sortable: true },
-  ];
+  // helpers
+  protected readonly hasDetail = computed(() => !!this.detailKind());
 
-  // helpers para layout
-  readonly showCompanies = computed(
-    () => this.viewMode() === 'all' || this.viewMode() === 'companies',
-  );
-  readonly showPlants = computed(() => this.viewMode() === 'all' || this.viewMode() === 'plants');
-  readonly showContacts = computed(
-    () => this.viewMode() === 'all' || this.viewMode() === 'contacts',
-  );
+  // actions
+  protected openCompany = (id: number) => this.ui.openCompany(id);
+  protected openPlant = (id: number) => this.ui.openPlant(id);
+  protected openContact = (id: number) => this.ui.openContact(id);
+  protected backToList = () => this.ui.backToList();
 
-  // Navegación/selección sincronizada con tu store
-  openCompany = (row: any) => this.ui.openCompany(row.id);
-  openPlant = (row: any) => this.ui.openPlant(row.id);
-  openContact = (row: any) => this.ui.openContact(row.id);
+  protected onTab(tab: 'companies' | 'plants' | 'contacts') {
+    this.activeTab.set(tab);
+  }
 }
