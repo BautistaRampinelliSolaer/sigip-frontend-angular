@@ -1,0 +1,17 @@
+<footer class="footer">
+  <section class="footer__content">
+    <div class="footer__brand">
+      <img ngSrc="/public/favicon.ico" width="100" height="20" alt="Ícono de la app" />
+      <span class="footer__name">{{ appName() }}</span>
+    </div>
+    <nav class="footer__links">
+      @for (link of links(); track link.label) {
+      <a [routerLink]="link.href" class="footer__link">{{ link.label }}</a>
+      }
+    </nav>
+
+    <div class="footer_copyright">
+      © {{ currentYear() }} {{ appName() }} — Todos los derechos reservados
+    </div>
+  </section>
+</footer>
