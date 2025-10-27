@@ -1,0 +1,26 @@
+<mat-toolbar class="header" color="surface">
+  <div class="header__left">
+    <img ngSrc="/assets/logo.svg" alt="SIGIP logo" width="32" height="32" priority />
+    <span class="header__title">{{ appName() }}</span>
+  </div>
+
+  @if (isLogged()) {
+  <div class="header__right">
+    <span class="header__user">{{user()?.name}} {{user()?.lastname}}</span>
+
+    <button mat-icon-button aria-label="Configuración">
+      <mat-icon>settings</mat-icon>
+    </button>
+
+    <app-theme-switcher />
+
+    <button mat-icon-button (click)="logout()" aria-label="Cerrar Sesión">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+  } @else {
+  <div class="header__right">
+    <app-theme-switcher />
+  </div>
+  }
+</mat-toolbar>
