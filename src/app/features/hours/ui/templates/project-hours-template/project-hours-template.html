@@ -1,11 +1,26 @@
-<section class="layout">
-  <aside class="panel">
-    <h3>Registrar horas</h3>
-    <app-project-hours-form [projects]="projects()" [users]="users()" />
+<section class="ph-layout">
+  <!-- PANEL LATERAL -->
+  <aside class="ph-layout__aside mat-elevation-z2">
+    <mat-card class="ph-layout__card">
+      <mat-card-header>
+        <mat-card-title>Registrar horas</mat-card-title>
+      </mat-card-header>
+      <mat-divider />
+      <mat-card-content>
+        <app-project-hours-form
+          [projects]="projects()"
+          [users]="users()"
+        />
+      </mat-card-content>
+    </mat-card>
   </aside>
 
-  <main class="content">
-    <app-project-hours-filters [projects]="projects()" [users]="users()" />
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="ph-layout__content">
+    <app-project-hours-filters
+      [projects]="projects()"
+      [users]="users()"
+    />
     <app-project-hours-table />
   </main>
 </section>

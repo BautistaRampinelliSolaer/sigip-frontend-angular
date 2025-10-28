@@ -1,13 +1,13 @@
 import { DestroyRef, effect, inject, Injectable, Injector, untracked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClientsUiStore, DetailKind } from './clients-ui.store';
+import { ClientsUiState, DetailKind } from './clients-ui.state';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class ClientsRouterSyncService {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-  private readonly ui = inject(ClientsUiStore);
+  private readonly ui = inject(ClientsUiState);
   private readonly dr = inject(DestroyRef);
   private readonly injector = inject(Injector);
 

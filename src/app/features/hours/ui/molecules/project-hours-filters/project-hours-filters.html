@@ -1,64 +1,84 @@
-<section>
-  <div class="row">
-    <label>
-      Proyecto
-      <select
-        #projectSel
+<section class="filters">
+  <!-- Primera fila -->
+  <div class="filters__row">
+    <!-- Proyecto -->
+    <mat-form-field appearance="outline" class="filters__field">
+      <mat-label>Proyecto</mat-label>
+      <mat-select
         [value]="selectedProjectId() ?? ''"
-        (change)="setProject(projectSel.value)"
+        (selectionChange)="setProject($event.value || null)"
       >
-        <option value="">Todos</option>
+        <mat-option [value]="''">Todos</mat-option>
         @for (p of projects(); track p.id) {
-          <option [value]="p.id">{{ p.name }}</option>
+          <mat-option [value]="p.id">{{ p.name }}</mat-option>
         }
-      </select>
-    </label>
+      </mat-select>
+    </mat-form-field>
 
-    <label>
-      Usuario
-      <select
-        #userSel
+    <!-- Usuario -->
+    <mat-form-field appearance="outline" class="filters__field">
+      <mat-label>Usuario</mat-label>
+      <mat-select
         [value]="selectedUserId() ?? ''"
-        (change)="setUser(userSel.value)"
+        (selectionChange)="setUser($event.value || null)"
       >
-        <option value="">Todos</option>
+        <mat-option [value]="''">Todos</mat-option>
         @for (u of users(); track u.id) {
-          <option [value]="u.id">{{ u.name }}</option>
+          <mat-option [value]="u.id">{{ u.name }}</mat-option>
         }
-      </select>
-    </label>
+      </mat-select>
+    </mat-form-field>
 
-    <label>
-      Desde
+    <!-- Desde -->
+    <mat-form-field appearance="outline" class="filters__field">
+      <mat-label>Desde</mat-label>
       <input
-        #fromInput
-        type="date"
-        [value]="from() ?? ''"
-        (change)="from.set(fromInput.value || null)"
+        matInput
+        [matDatepicker]="pickerFrom"
+        [value]="from()"
+        (dateChange)="from.set($event.value)"
       />
-    </label>
+      <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFrom />
+    </mat-form-field>
 
-    <label>
-      Hasta
+    <!-- Hasta -->
+    <mat-form-field appearance="outline" class="filters__field">
+      <mat-label>Hasta</mat-label>
       <input
-        #toInput
-        type="date"
-        [value]="to() ?? ''"
-        (change)="to.set(toInput.value || null)"
+        matInput
+        [matDatepicker]="pickerTo"
+        [value]="to()"
+        (dateChange)="to.set($event.value)"
       />
-    </label>
+      <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+      <mat-datepicker #pickerTo />
+    </mat-form-field>
 
-    <button type="button" (click)="applyDates()">Aplicar</button>
-    <button type="button" (click)="clearDates()">Limpiar</button>
+    <div class="filters__actions">
+      <button mat-flat-button color="primary" (click)="applyDates()">Aplicar</button>
+      <button mat-stroked-button color="primary" (click)="clearDates()">Limpiar</button>
+    </div>
   </div>
 
-  <div class="row">
-    <input
-      #qInput
-      placeholder="Buscar por descripción/proyecto/usuario…"
-      [value]="q()"
-      (input)="q.set(qInput.value)"
-    />
-    <button type="button" (click)="applySearch()">Buscar</button>
+  <!-- Segunda fila -->
+  <div class="filters__row">
+    <mat-form-field class="filters__search" appearance="outline">
+      <mat-label>Buscar</mat-label>
+      <input
+        matInput
+        placeholder="Descripción / Proyecto / Usuario"
+        [value]="q()"
+        (input)="q.set($any($event.target).value)"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        aria-label="Buscar"
+        (click)="applySearch()"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
   </div>
 </section>

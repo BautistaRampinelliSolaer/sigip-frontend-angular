@@ -1,11 +1,10 @@
-// project-edit-host.spec.ts
 import { describe, it, beforeEach, expect, vi } from 'vitest';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { ProjectEdit } from './project-edit';
-import { ProjectState } from '../../state/project-state';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { ProjectEdit } from './project-edit';
+import { ProjectState } from '../../state/project-state';
 
 @Component({
   standalone: true,
@@ -14,29 +13,24 @@ import { By } from '@angular/platform-browser';
 })
 class HostProjectEditTest {}
 
-// Stub for ProjectForm
-import { EventEmitter, Output } from '@angular/core';
-
 @Component({
   selector: 'project-form',
   standalone: true,
   template: '',
 })
 class ProjectFormStub {
-  @Output() submit = new EventEmitter<any>();
+  @Output() submit = new EventEmitter<unknown>();
 }
 
-// Stub for Skeleton
 @Component({
-  selector: 'skeleton',
+  selector: 'app-skeleton',
   standalone: true,
   template: '',
 })
 class SkeletonStub {}
 
-// Stub for ErrorState
 @Component({
-  selector: 'error-state',
+  selector: 'app-error-state',
   standalone: true,
   template: '',
 })
@@ -57,9 +51,9 @@ describe('ProjectEdit (host)', () => {
       },
     };
     storeMock = {
-      entityById: () => null,
-      entityLoading: () => false,
-      entityError: () => null,
+      entityById: vi.fn().mockReturnValue(null),
+      entityLoading: vi.fn().mockReturnValue(false),
+      entityError: vi.fn().mockReturnValue(null),
       loadById: vi.fn(),
       edit: vi.fn().mockResolvedValue(undefined),
     };
@@ -78,9 +72,9 @@ describe('ProjectEdit (host)', () => {
     fixture.detectChanges();
   });
 
-  it('cuando project existe, muestra ProjectForm stub y save via submit', () => {
+  it('should render ProjectForm and call save when project exists', async () => {
     const proj = { id: 123, code: 'C', name: 'Name' };
-    storeMock.entityById = () => proj;
+    storeMock.entityById.mockReturnValue(proj);
 
     fixture.detectChanges();
 
@@ -92,19 +86,20 @@ describe('ProjectEdit (host)', () => {
 
     const formStub = formDebug.componentInstance as ProjectFormStub;
     formStub.submit.emit({ name: 'Updated' });
+    await Promise.resolve();
     expect(storeMock.edit).toHaveBeenCalledWith(123, { name: 'Updated' });
   });
 
-  it('cuando loading true, muestra SkeletonStub', () => {
-    storeMock.entityLoading = () => true;
+  it('should render SkeletonStub when loading', () => {
+    storeMock.entityLoading.mockReturnValue(true);
     fixture.detectChanges();
 
     const editDebug = fixture.debugElement.query(By.directive(ProjectEdit));
     expect(editDebug.query(By.directive(SkeletonStub))).toBeTruthy();
   });
 
-  it('cuando hay error, muestra ErrorStateStub', () => {
-    storeMock.entityError = () => 'Err';
+  it('should render ErrorStateStub when error', () => {
+    storeMock.entityError.mockReturnValue('Err');
     fixture.detectChanges();
 
     const editDebug = fixture.debugElement.query(By.directive(ProjectEdit));

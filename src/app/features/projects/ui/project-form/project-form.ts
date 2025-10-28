@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ProjectDTO } from '@app/domain/models';
-import { MatInputModule } from "@angular/material/input";
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 // type EditableKeys =
@@ -32,7 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrls: ['./project-form.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectForm implements OnInit{
+export class ProjectForm implements OnInit {
   private readonly fb = inject(FormBuilder);
   project = input<ProjectDTO | null>(null);
 

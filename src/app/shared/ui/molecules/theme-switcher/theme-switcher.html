@@ -1,12 +1,9 @@
 <div class="theme-switcher">
-  <button class="btn outline" (click)="setLight()">Claro</button>
-  <button class="btn outline" (click)="setDark()">Oscuro</button>
   <button class="btn" (click)="toggle()">
     @if (isDark()) {
       <span>☾</span>
     } @else {
       <span>☀</span>
     }
-    Toggle
   </button>
 </div>

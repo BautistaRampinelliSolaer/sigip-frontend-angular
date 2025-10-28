@@ -1,9 +1,46 @@
-<nav class="side">
-    <div class="user">👤 {{userName()}}</div>
-    <a routerLink="/" routerLinkActive="active">Home</a>
-    <a routerLink="/projects" routerLinkActive="active">Proyectos</a>
-    <a routerLink="/hours" routerLinkActive="active">Horas</a>
-    <a routerLink="/clients" routerLinkActive="active">Clientes</a>
-    <a routerLink="/profile" routerLinkActive="active">Mi Perfil</a>
-    <button class="logout" (click)="logout.emit()">Cerrar Sesión</button>
-</nav>
+<aside class="sidenav" [class.collapsed]="collapsed()">
+  <header class="sidenav__brand">
+    <img [ngSrc]="imgSrc()" width="28" height="28" alt="Logo SIGIP" />
+    @if (!collapsed()) {
+    <span class="sidenav__app">{{appName}}</span>
+    }
+  </header>
+
+  <section class="sidenav__user">
+    <div class="avatar">
+        <span class="avatar__text">{{initials()}}</span>
+    </div>
+    @if (!collapsed()) {
+        <div class="user__meta">
+            <span class="user__name">{{ userName() }}</span>
+            <span class="user__role">{{ userRole() }}</span>
+        </div>
+    }
+  </section>
+
+  <nav class="sidenav__nav">
+    <mat-nav-list>
+        @for (item of items(); track item.label) {
+            <a mat-list-item
+            [routerLink]="item.link"
+            routerLinkActive="active"
+            #rla="routerLinkActive"
+            [activated]="rla.isActive">
+            <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+            @if (!collapsed()) {
+                <span class="label">{{ item.label }}</span>
+            }
+            </a>
+        }
+    </mat-nav-list>
+  </nav>
+
+  <footer class="sidenav__footer">
+    <button mat-stroked-button class="btn-logout" (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+        @if (!collapsed()) {
+            <span>Cerrar Sesión</span>
+        }
+    </button>
+  </footer>
+</aside>

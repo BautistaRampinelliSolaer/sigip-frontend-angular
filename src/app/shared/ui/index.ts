@@ -4,7 +4,6 @@ export * from './atoms/breadcrumbs/breadcrumbs';
 export * from './atoms/search-input/search-input';
 export * from './atoms/sort-select/sort-select';
 export * from './molecules/search-field/search-field';
-export * from './molecules/header/header';
 export * from './molecules/theme-switcher/theme-switcher';
 export * from './molecules/confirm-dialog/confirm-dialog';
 export * from './molecules/skeleton/skeleton';
@@ -12,3 +11,4 @@ export * from './molecules/error-state/error-state';
 export * from './molecules/empty-state/empty-state'
 export * from './organisms/data-table/data-table';
 export * from './organisms/sidenav/sidenav';
+export * from './organisms/header/header';

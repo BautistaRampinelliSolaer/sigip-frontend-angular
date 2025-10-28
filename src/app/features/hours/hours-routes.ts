@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { projectHoursPresetResolver } from './hours.resolver';
 import { projectHoursApiProvider } from '@app/infrastructure/api/hours/hours-api.provider';
-import { provideHoursState } from './hours.state.provider';
+import { provideHoursState } from './hours.state.providers';
 import { USE_MOCK_PROJECT_HOURS_API } from '@app/infrastructure/api/hours/project-hours/project-hours.token';
 import { provideHoursInit } from './hours.init';
 

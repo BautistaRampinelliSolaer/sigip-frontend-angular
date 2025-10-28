@@ -1,15 +1,19 @@
 import { describe, it, beforeEach, afterEach, expect, vi } from 'vitest';
 import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
-import { ProjectsFilters, Filters } from './projects-filters';
-import { BrowserStorage } from '@app/core/storage/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { BrowserStorage } from '@app/core/storage/storage';
+import { Filters, ProjectsFilters } from './projects-filters';
 
-class StorageMock {
+class StorageMock implements Partial<BrowserStorage> {
   private map = new Map<string, string>();
-  getItem(key: string) { return this.map.get(key) ?? null; }
-  setItem(key: string, value: string) { this.map.set(key, value); }
+  getItem(key: string) {
+    return this.map.get(key) ?? null;
+  }
+  setItem(key: string, value: string) {
+    this.map.set(key, value);
+  }
 }
 
 describe('ProjectsFilters', () => {
@@ -22,9 +26,7 @@ describe('ProjectsFilters', () => {
 
     TestBed.configureTestingModule({
       imports: [ProjectsFilters, ReactiveFormsModule, MatInputModule, MatSelectModule],
-      providers: [
-        { provide: BrowserStorage, useValue: storageMock }
-      ]
+      providers: [{ provide: BrowserStorage, useValue: storageMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectsFilters);
@@ -39,47 +41,38 @@ describe('ProjectsFilters', () => {
     const stored: Filters = { q: 'xyz', state: 'IN_PROGRESS', responsibleId: 42 };
     storageMock.setItem('projects.filters', JSON.stringify(stored));
 
-    fixture.detectChanges(); // inicializa el componente (ngOnInit)
-    // No emitir inmediatamente al patch
+    fixture.detectChanges();
     let emitted: Filters | undefined;
-    component.apply.subscribe(v => emitted = v);
+    component.apply.subscribe((v) => (emitted = v));
 
-    // no emitió nada al patch inicial
     expect(emitted).toBeUndefined();
-
-    // los valores del form coinciden
     expect(component.form.value).toEqual(stored);
   });
 
   it('debe emitir apply con el valor luego del debounce', fakeAsync(() => {
-    fixture.detectChanges(); // arranca
+    fixture.detectChanges();
     let emitted: Filters | undefined;
-    component.apply.subscribe(v => emitted = v);
+    component.apply.subscribe((v) => (emitted = v));
 
-    // cambias un control
     component.form.controls.q.setValue('abc');
     component.form.controls.state.setValue('OPEN');
     component.form.controls.responsibleId.setValue(7);
 
-    // sin tiempo no emite
     tick(200);
     expect(emitted).toBeUndefined();
 
-    // después del debounce de 250ms
     tick(300);
     expect(emitted).toEqual({ q: 'abc', state: 'OPEN', responsibleId: 7 });
-    // y también debe haberse guardado al storage
     const raw = storageMock.getItem('projects.filters');
     expect(raw).toBe(JSON.stringify({ q: 'abc', state: 'OPEN', responsibleId: 7 }));
   }));
 
   it('debe desuscribirse en ngOnDestroy', () => {
     fixture.detectChanges();
-    // spy al unsub
-    const sub = component['sub'];
-    vi.spyOn(sub!, 'unsubscribe');
+    const sub = component['sub']!;
+    vi.spyOn(sub, 'unsubscribe');
 
     component.ngOnDestroy();
-    expect(sub?.unsubscribe).toHaveBeenCalled();
+    expect(sub.unsubscribe).toHaveBeenCalled();
   });
 });

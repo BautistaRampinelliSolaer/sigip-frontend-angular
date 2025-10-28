@@ -5,14 +5,21 @@
 
 html,
 body {
+  margin: 0;
+  padding: 0;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  margin: 0;
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
+}
+
+.app-main {
+  flex: 1 0 auto;
 }
 
 // Utilities

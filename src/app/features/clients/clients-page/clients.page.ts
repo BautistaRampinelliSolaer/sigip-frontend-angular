@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
-import { ClientsUiStore } from '../state/clients-ui.store';
 import { BreadcrumbsComponent } from '@app/shared/ui';
 import { ClientsToolbar } from '../ui/molecules/toolbar/toolbar';
 import { CompaniesTable } from '../ui/organisms/companies-table/table';
 import { PlantsTableComponent } from '../ui/organisms/plants-table/plants-table';
 import { ClientContactTable } from '../ui/organisms/client-contact-table/client-contact-table';
 import { MatIconModule } from "@angular/material/icon";
+import { ClientsUiState } from '../state/clients-ui.state';
 
 @Component({
   selector: 'clients-page',
@@ -26,7 +26,7 @@ import { MatIconModule } from "@angular/material/icon";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientsPage {
-  private readonly ui = inject(ClientsUiStore);
+  private readonly ui = inject(ClientsUiState);
 
   // bind UI store signals
   protected readonly activeTab = this.ui.activeTab;

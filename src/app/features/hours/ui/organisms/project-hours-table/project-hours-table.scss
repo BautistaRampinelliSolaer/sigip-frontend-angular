@@ -1,44 +1,88 @@
-table {
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--mat-sys-surface-container-lowest);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+}
+
+.ph-table__mat {
   width: 100%;
   border-collapse: collapse;
+
+  th {
+    font-weight: 600;
+    color: var(--mat-sys-on-surface-variant);
+    background-color: var(--mat-sys-surface-container);
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+
+    .sort-icon {
+      vertical-align: middle;
+      font-size: 18px;
+      margin-left: 4px;
+      color: var(--mat-sys-outline-variant);
+    }
+  }
+
+  td {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--mat-sys-outline-variant);
+    color: var(--mat-sys-on-surface);
+    vertical-align: top;
+
+    &.mono {
+      font-family: 'Roboto Mono', monospace;
+      text-align: right;
+    }
+
+    &.desc {
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    &.actions {
+      text-align: center;
+
+      button {
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  tr.selected {
+    background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+  }
 }
-th,
-td {
-  padding: 0.5rem 0.6rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  vertical-align: top;
-}
-thead th {
-  text-align: left;
-}
-thead th button {
-  all: unset;
-  cursor: pointer;
-  font-weight: 600;
-}
-tr.selected {
-  background: rgba(0, 120, 255, 0.05);
-}
-.mono {
-  font-variant-numeric: tabular-nums;
-}
-.desc {
-  max-width: 48ch;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+
 .pager {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-.pager .spacer {
-  flex: 1;
-}
-.muted {
-  color: #6b7280;
-}
-.error {
-  color: #b00020;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+
+  .pager__info,
+  .pager__total {
+    font-size: 0.9rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .spacer {
+    flex: 1;
+  }
 }

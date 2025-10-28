@@ -1,34 +1,85 @@
-<form (ngSubmit)="submit()" [formGroup]="form" class="grid">
-  <label>
-    Proyecto
-    <select formControlName="projectId" required>
-      <option [ngValue]="null">Proyecto...</option>
+<form [formGroup]="form" (ngSubmit)="submit()" class="ph-form__grid">
+  <!-- Proyecto -->
+  <mat-form-field appearance="outline">
+    <mat-label>Proyecto</mat-label>
+    <mat-select formControlName="projectId" required>
+      <mat-option [value]="null">Seleccione un proyecto</mat-option>
       @for (p of projects(); track p.id) {
-      <option [ngValue]="p.id">{{p.name}}</option>
+        <mat-option [value]="p.id">{{ p.name }}</mat-option>
       }
-    </select>
-  </label>
+    </mat-select>
+    @if (form.controls.projectId.invalid && form.controls.projectId.touched) {
+      <mat-error>Proyecto requerido</mat-error>
+    }
+  </mat-form-field>
 
-  <label>
-    Fecha
-    <input type="date" formControlName="workDate" required />
-  </label>
+  <!-- Usuario -->
+  <mat-form-field appearance="outline">
+    <mat-label>Usuario</mat-label>
+    <mat-select formControlName="userId" required>
+      <mat-option [value]="null">Seleccione usuario</mat-option>
+      @for (u of users(); track u.id) {
+        <mat-option [value]="u.id">{{ u.name }}</mat-option>
+      }
+    </mat-select>
+    @if (form.controls.userId.invalid && form.controls.userId.touched) {
+      <mat-error>Usuario requerido</mat-error>
+    }
+  </mat-form-field>
 
-  <label>
-    Horas
-    <input type="number" formControlName="workedHours" step="0.25" min="0.25" required />
-  </label>
+  <!-- Fecha -->
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha</mat-label>
+    <input
+      matInput
+      type="date"
+      formControlName="workDate"
+      required
+    />
+    <mat-icon matSuffix>event</mat-icon>
+    @if (form.controls.workDate.invalid && form.controls.workDate.touched) {
+      <mat-error>Fecha requerida</mat-error>
+    }
+  </mat-form-field>
 
-  <label class="col-span">
-    descripción
+  <!-- Horas -->
+  <mat-form-field appearance="outline">
+    <mat-label>Horas trabajadas</mat-label>
+    <input
+      matInput
+      type="number"
+      step="0.25"
+      min="0.25"
+      formControlName="workedHours"
+      required
+    />
+    <mat-icon matSuffix>schedule</mat-icon>
+    @if (form.controls.workedHours.invalid && form.controls.workedHours.touched) {
+      <mat-error>Mínimo 0.25 horas</mat-error>
+    }
+  </mat-form-field>
+
+  <!-- Descripción -->
+  <mat-form-field appearance="outline" class="ph-form__textarea">
+    <mat-label>Descripción</mat-label>
     <textarea
+      matInput
       formControlName="description"
       rows="3"
       placeholder="Breve descripción de la tarea desarrollada"
     ></textarea>
-  </label>
+  </mat-form-field>
 
-  <div class="actions">
-    <button type="submit">Registrar</button>
+  <!-- Acciones -->
+  <div class="ph-form__actions">
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || submitting()"
+    >
+      <mat-icon>save</mat-icon>
+      Registrar
+    </button>
   </div>
 </form>

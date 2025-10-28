@@ -8,7 +8,7 @@ export type DetailKind = 'company' | 'plant' | 'contact' | null;
 
 // Single Source of Truth for UI State
 @Injectable()
-export class ClientsUiStore {
+export class ClientsUiState {
   private readonly companies = inject(CompanyRepo);
   private readonly plants = inject(PlantCompanyRepo);
   private readonly contacts = inject(ClientContactRepo);

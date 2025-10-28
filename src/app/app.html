@@ -1,19 +1,35 @@
 <mat-sidenav-container class="layout">
+
+  <!-- SIDENAV -->
   @if (auth.isLogged()) {
-    <mat-sidenav mode="side" [opened]="true" class="sidenav">
-      <app-sidenav 
+    <mat-sidenav
+      #drawer
+      class="layout__sidenav"
+      mode="side"
+      [opened]="isSidenavOpen()"
+    >
+      <app-sidenav
         [userName]="userName()"
+        [userRole]="userRole()"
         (logout)="onLogout()"
       />
     </mat-sidenav>
   }
 
-  <mat-sidenav-content class="content">
-    <mat-toolbar class="toolbar">
-      <img ngSrc="/assets/logo.svg" width="32" height="32" alt="Logo" priority />
-      <span class="brand">SIGIP</span>
-      <app-theme-switcher></app-theme-switcher>
-    </mat-toolbar>
-    <router-outlet/>
+  <!-- CONTENT -->
+  <mat-sidenav-content class="layout__content">
+    <header class="layout__header">
+      <app-header
+        (menuToggle)="toggleSidenav()"
+      />
+    </header>
+
+    <main class="layout__main">
+      <router-outlet />
+    </main>
+
+    <footer class="layout__footer">
+      <app-footer />
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,1 +1,51 @@
-// colors: 1E6499 004264 F9FAFB 74A5C5 000000
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; // 👈 elimina scroll global
+}
+
+.layout {
+  height: 100dvh; // 👈 ocupa todo el viewport
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: var(--mat-sys-surface);
+
+  &__sidenav {
+    border-right: 1px solid var(--mat-sys-outline-variant);
+    box-shadow: var(--shadow-1);
+    width: 280px;
+    background: var(--mat-sys-surface);
+    overflow: hidden; // 👈 sin scroll en sidenav
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__header {
+    flex-shrink: 0;
+    z-index: 10;
+  }
+
+  &__main {
+    flex: 1 1 auto;
+    overflow-y: auto; // 👈 scroll solo aquí
+    overflow-x: hidden;
+    padding: var(--space-6);
+    background: var(--mat-sys-surface-container-lowest);
+  }
+
+  &__footer {
+    flex-shrink: 0;
+    background: var(--mat-sys-surface);
+    border-top: 1px solid var(--mat-sys-outline-variant);
+  }
+}

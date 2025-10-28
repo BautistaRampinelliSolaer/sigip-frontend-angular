@@ -1,14 +1,12 @@
-// projects-table-host.spec.ts
 import { describe, it, beforeEach, expect, vi } from 'vitest';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { ProjectsTable } from './projects-table';
-import { ProjectsColumnsStore } from '../projects-columns.store';
-import { ProjectState } from '../../state/project-state';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
+import { ProjectsTable } from './projects-table';
 import { ProjectDTO } from '@app/domain/models';
-import { Key } from '../projects-columns.store';
+import { Key, ProjectsColumnsStore } from '../projects-columns.store';
+import { ProjectState } from '../../state/project-state';
 
 @Component({
   standalone: true,
@@ -17,28 +15,36 @@ import { Key } from '../projects-columns.store';
 })
 class HostProjectsTableTest {}
 
-// Stub for DataTable component
-import { EventEmitter, Input, Output } from '@angular/core';
 @Component({
-  selector: 'data-table',
+  selector: 'app-data-table',
   template: '',
   standalone: true,
 })
-class DataTableStub {
-  @Input() columns: any;
-  @Input() data: any;
-  @Input()
-    loading: boolean = false;
+class DataTableStub<T> {
+  @Input() columns!: unknown;
+  @Input() data!: unknown;
+  @Input() loading: boolean = false;
   @Input() error: any;
-  @Output() rowClick = new EventEmitter<any>();
+  @Output() rowClick = new EventEmitter<T>();
 }
 
 describe('ProjectsTable (host)', () => {
   let fixture: ComponentFixture<HostProjectsTableTest>;
 
-  let colsMock: any;
-  let stateMock: any;
-  let routerMock: any;
+  let colsMock: {
+    visible: () => Array<{ key: string; header: string }>;
+    all: Array<{ key: string; header: string }>;
+    selectedKeys: () => string[];
+    setSelected: ReturnType<typeof vi.fn>;
+  };
+  let stateMock: {
+    projects: () => ProjectDTO[];
+    loadingList: () => boolean;
+    listError: () => string | null;
+  };
+  let routerMock: {
+    navigate: ReturnType<typeof vi.fn>;
+  };
 
   const dummyAll = [
     { key: 'code', header: 'Código' },
@@ -57,7 +63,7 @@ describe('ProjectsTable (host)', () => {
       setSelected: vi.fn(),
     };
     stateMock = {
-      projects: () => [{ id: 1, code: 'A', name: 'Prj A' }],
+      projects: () => [{ id: 1, code: 'A', name: 'Prj A' }] as ProjectDTO[],
       loadingList: () => false,
       listError: () => null,
     };
@@ -76,33 +82,29 @@ describe('ProjectsTable (host)', () => {
     fixture.detectChanges();
   });
 
-  it('DataTable stub debe estar presente y recibir inputs correctos', () => {
-    // Encuentra el componente projects-table dentro del host
+  it('should render DataTable stub and pass correct inputs', () => {
     const ptDebug = fixture.debugElement.query(By.directive(ProjectsTable));
     expect(ptDebug).toBeTruthy();
-    // Ahora dentro de ese subtree encontrar DataTableStub
     const dtDebug = ptDebug.query(By.directive(DataTableStub));
     expect(dtDebug).toBeTruthy();
-    const dt = dtDebug.componentInstance as DataTableStub;
+    const dt = dtDebug.componentInstance as DataTableStub<ProjectDTO>;
 
-    // Verificá los inputs del stub
     expect(dt.columns).toEqual(dummyVisible);
     expect(dt.data).toEqual(stateMock.projects());
     expect(dt.loading).toBe(false);
     expect(dt.error).toBeNull();
   });
 
-  it('cuando rowClick emite del DataTable stub, ProjectsTable openDetail debe navegar', () => {
+  it('when rowClick is emitted, should navigate to detail', () => {
     const ptDebug = fixture.debugElement.query(By.directive(ProjectsTable));
     const dtDebug = ptDebug.query(By.directive(DataTableStub));
-    expect(dtDebug).toBeTruthy();
-    const dt = dtDebug.componentInstance as DataTableStub;
+    const dt = dtDebug.componentInstance as DataTableStub<ProjectDTO>;
 
-    dt.rowClick.emit({ id: 7 });
-    expect(routerMock.navigate).toHaveBeenCalledWith([`projects/7`]);
+    dt.rowClick.emit({ id: 7 } as ProjectDTO);
+    expect(routerMock.navigate).toHaveBeenCalledWith(['projects/7']);
   });
 
-  it('toggleKey debe llamar setSelected del store', () => {
+  it('toggleKey should call setSelected with updated keys', () => {
     const pt = fixture.debugElement.query(By.directive(ProjectsTable)).componentInstance as ProjectsTable;
     pt.toggleKey('name' as Key);
     expect(colsMock.setSelected).toHaveBeenCalledWith([...dummySelectedKeys, 'name']);
