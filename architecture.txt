@@ -1,0 +1,102 @@
+src/app/
+ ├─ app.config.server.ts
+ ├─ app.config.ts
+ ├─ app.html
+ ├─ app.routes.server.ts
+ ├─ app.routes.ts
+ ├─ app.scss
+ ├─ app.ts
+ ├─ core/
+ │  ├─ auth/
+ │  │  ├─ auth.guard.spec.ts
+ │  │  ├─ auth.guard.ts
+ │  │  ├─ auth.interceptor.spec.ts
+ │  │  ├─ auth.interceptor.ts
+ │  │  ├─ auth.service.mock.ts
+ │  │  ├─ auth.service.spec.ts
+ │  │  └─ auth.service.ts
+ │  ├─ config/
+ │  │  └─ environment-token.ts
+ │  ├─ http/
+ │  │  ├─ api.error.adapter.ts
+ │  │  ├─ api.tokens.ts
+ │  │  └─ http-client.ts
+ │  ├─ storage/
+ │  │  ├─ storage.token.spec.ts
+ │  │  ├─ storage.token.ts
+ │  │  ├─ storage.ts
+ │  │  ├─ universal.storage.spec.ts
+ │  │  └─ universal.storage.ts
+ │  ├─ theme/
+ │  │  └─ theme.service.ts
+ │  ├─ ui/
+ │  │  └─ theme.store.ts
+ │  └─ utils/
+ ├─ domain/
+ │  └─ models/
+ │     ├─ clients/
+ │     ├─ common/
+ │     ├─ documents/
+ │     ├─ index.ts
+ │     ├─ projects/
+ │     └─ users/
+ ├─ features/
+ │  ├─ clients/
+ │  │  ├─ clients-page/
+ │  │  ├─ clients.init.ts
+ │  │  ├─ clients.routes.ts
+ │  │  ├─ clients.state.providers.ts
+ │  │  ├─ state/
+ │  │  └─ ui/
+ │  ├─ documents/
+ │  │  └─ documents-routes.ts
+ │  ├─ home/
+ │  │  ├─ home.html
+ │  │  ├─ home.scss
+ │  │  └─ home.ts
+ │  ├─ hours/
+ │  │  ├─ data/
+ │  │  ├─ hours-routes.ts
+ │  │  ├─ hours.init.ts
+ │  │  ├─ hours.resolver.ts
+ │  │  ├─ hours.state.providers.ts
+ │  │  └─ ui/
+ │  ├─ index.ts
+ │  ├─ lifecycle/
+ │  │  ├─ state/
+ │  │  └─ ui/
+ │  ├─ login/
+ │  │  ├─ login-delay.token.ts
+ │  │  ├─ login.page.html
+ │  │  ├─ login.page.scss
+ │  │  ├─ login.page.ts
+ │  │  └─ login.spec.ts
+ │  ├─ projects/
+ │  │  ├─ projects-routes.ts
+ │  │  ├─ projects.state.providers.ts
+ │  │  ├─ state/
+ │  │  └─ ui/
+ │  └─ users/
+ │     ├─ state/
+ │     └─ ui/
+ ├─ infrastructure/
+ │  ├─ adapters/
+ │  ├─ api/
+ │  │  ├─ clients/
+ │  │  ├─ documents/
+ │  │  ├─ hours/
+ │  │  ├─ index.ts
+ │  │  ├─ projects/
+ │  │  └─ users/
+ │  └─ helpers/
+ │     └─ unwrap.ts
+ └─ shared/
+    ├─ form-controls/
+    ├─ helpers/
+    │  └─ normalize-error.ts
+    └─ ui/
+       ├─ atoms/
+       ├─ index.ts
+       ├─ models/
+       ├─ molecules/
+       └─ organisms/

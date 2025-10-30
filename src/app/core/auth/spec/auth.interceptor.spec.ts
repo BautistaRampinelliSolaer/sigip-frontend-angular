@@ -5,10 +5,10 @@ import { provideHttpClientTesting, HttpTestingController } from '@angular/common
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { authInterceptor } from './auth.interceptor';
-import { API_URL } from '../http/api.tokens';
-import { UniversalStorage } from '../storage/universal.storage';
-import { AuthService } from '../auth/auth.service';
+import { authInterceptor } from '../auth.interceptor';
+import { API_URL } from '../../http/api.tokens';
+import { UniversalStorage } from '../../storage/universal.storage';
+import { AuthService } from '../auth.service';
 
 // --- Test doubles -----------------------------------------------------------
 const API_BASE = 'https://api.test.local';

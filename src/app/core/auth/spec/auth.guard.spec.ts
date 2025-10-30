@@ -5,8 +5,8 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { provideLocationMocks } from '@angular/common/testing';
 import { expect, describe, it, beforeEach, vi } from 'vitest';
 import { Location } from '@angular/common';
-import { authGuard, loginBlockGuard } from './auth.guard';
-import { AuthService } from './auth.service';
+import { authGuard, loginBlockGuard } from '../auth.guard';
+import { AuthService } from '../auth.service';
 
 @Component({ template: '<p>Home</p>' })
 class HomeCmp {}
